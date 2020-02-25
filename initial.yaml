@@ -1,0 +1,30 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+
+- name: add sudo users (defaults to ap)
+  user:
+    name: "{{ item }}"
+    state: present
+    groups: "wheel"
+    shell: /bin/bash
+    password: $1$zudKMbFJ$6pq5pyHUcPCpg4aj7jtLY.
+  loop:
+    - ap
+
+- name: Set timezone to Europe/Berlin
+  timezone:
+    name: Europe/Berlin
+
+- name: upgrade dnf, install vim, git and enable autoremove
+  dnf:
+    name:
+        - "*"
+        - vim
+        - git    
+    state: latest
+
+- name: autoremove unneeded packages installed as dependencies
+  dnf:
+    autoremove: yes
