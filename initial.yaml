@@ -17,6 +17,8 @@
   timezone:
     name: Europe/Berlin
 
+- ping:
+
 - name: upgrade dnf, install vim, git and enable autoremove
   dnf:
     name:
